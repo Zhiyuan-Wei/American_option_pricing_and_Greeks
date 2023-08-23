@@ -312,66 +312,9 @@ class AmericanOptionsLSMC(object):
     #     self.gamma_and_vanna = grad(self.first_order_greeks[0], [self.S, self.sigma], retain_graph=True)
     #     self.volga = grad(self.first_order_greeks[1], self.sigma)
 
+
+
 if __name__ == "__main__":
-#    for epsilon in [0.1,0.2,0.5,1,5,10]:
-#     ave = 0
-#     delta = gamma = vega = rho = theta = phi = volga = vanna = 0
-#
-#     type = 'P'
-#     S = 36.
-#     K = 40.
-#     T = 1.
-#     M = 50
-#     r = 0.06
-#     div = 0.0
-#     sigma = 0.2
-#     n_poly = 2
-#     n_sim = 100000
-#     epsilon = 0.1
-#     n_time = 1
-#
-#     func_num = 5
-#     '''
-#     1: self.Poly_reg_filter
-#     2: self.Poly_reg_no_filter
-#     3: self.Poly_reg_choose_deg_filter
-#     4: self.Poly_reg_choose_deg_no_filter
-#     5: self.Laguerre_poly_reg_filter
-#     6: self.Laguerre_poly_reg_no_filter
-#     '''
-#
-#     for n_t in range(n_time):
-#         AmericanOption = AmericanOptionsLSMC(type, S, K, T, M, r, div, sigma,
-#                                 func_num, n_poly, n_sim, 223, epsilon)
-#         AmericanOption.price()
-#         AmericanOption.get_greeks()
-#         ave = (ave * n_t + float(AmericanOption.V0)) / (n_t + 1)
-#         delta = (delta * n_t + AmericanOption.first_order_greeks[0]) / (n_t + 1)
-#         gamma = (gamma * n_t + AmericanOption.gamma_and_vanna[0]) / (n_t + 1)
-#         vega = (vega * n_t + AmericanOption.first_order_greeks[1]) / (n_t+1)
-#         rho = (rho * n_t + AmericanOption.first_order_greeks[2]) / (n_t+1)
-#         theta = (theta * n_t + AmericanOption.first_order_greeks[3]) / (n_t+1)
-#         phi = (phi * n_t + AmericanOption.first_order_greeks[4]) / (n_t+1)
-#         volga = (volga * n_t + AmericanOption.volga[0]) / (n_t+1)
-#         vanna = (vanna * n_t + AmericanOption.gamma_and_vanna[1]) / (n_t + 1)
-#
-# #    print(f'epsilon: {epsilon}')
-#     print(f'Price: {ave}')
-#
-#     print(f'Delta: {delta}')
-#     print(f'Gamma: {gamma}')
-#     print(f'Vega: {vega}')
-#     print(f'Rho: {rho}')
-#     print(f'Theta: {theta}')
-#     print(f'Phi: {phi}')
-#     print(f'Volga: {volga}')
-#     print(f'Vanna: {vanna}')
-#
-#     print(f'std: {AmericanOption.std}')
-#     print('')
-#     torch.cuda.empty_cache()
-
-
 
     ave = 0
     delta = gamma = vega = rho = theta = phi = volga = vanna = 0
@@ -435,21 +378,3 @@ if __name__ == "__main__":
     print(f'time2: {time2}')
     print(f'time3: {time3}')
     torch.cuda.empty_cache()
-
-'''
-C@100@100@10000
-Price: 10.662687680336612
-Delta: 0.6510578989982605
-Gamma: -0.010520805652516493
-Vega: 36.58066177368164
-Rho: 48.986671447753906
-Theta: -6.597272872924805
-
-C@100@100@1000
-Price: 10.508234224272393
-Delta: 0.672687828540802
-Gamma: 0.061498442931099816
-Vega: 38.00588607788086
-Rho: 44.00094223022461
-Theta: -6.440632343292236
-'''
