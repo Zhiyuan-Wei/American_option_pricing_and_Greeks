@@ -179,8 +179,6 @@ class AmericanOptionsLSMC(object):
 
 
 
-
- #   @property
     def price(self):
         '''This part calculates option price and calculated price std'''
 
@@ -189,7 +187,6 @@ class AmericanOptionsLSMC(object):
         first = self.S * torch.ones(self.simulations)
         prices = []
         prices.append(first.unsqueeze(0))
-#        torch.manual_seed(self.seed)
 
         for j in range(1, int(self.T * self.M) + 1):
             '''antithetic for brownian motion'''
@@ -223,14 +220,12 @@ class AmericanOptionsLSMC(object):
             if i == int(self.M * self.T) - 1:
                 V_pre = payoff[i + 1]
                 Y = payoff[i + 1]
-       #    W = payoff[i + 1]
 
             '''calculate option value under CV'''
             BS_price = self.bs_price(MCprice_matrix[i], self.T*(1-i/(self.M * self.T))) # the corresponding european option price at each time
 
             if self.func_num % 2 == 0:
                 WY_apx = self.func(MCprice_matrix[i], V_pre * Y) # expected V*Y
-    #            WY_apx = self.func(MCprice_matrix[i], continuation_value * Y)
                 Y_apx = self.func(MCprice_matrix[i], Y) # expected Y
                 Y2_apx = self.func(MCprice_matrix[i], torch.square(Y)) # expected Y^2
                 continuation_value = self.func(MCprice_matrix[i], V_pre) # expected V as continuation value
@@ -281,7 +276,6 @@ class AmericanOptionsLSMC(object):
         self.std = self.discount * torch.std(V_CV) # calculate option value stability
 
 
-#    @property
     def calculate_greeks(self):
         self.V0.backward()
 
